@@ -1,7 +1,7 @@
 package cn.bm.ssm.controller;
 
-import cn.bm.ssm.service.ProductService;
 import cn.bm.ssm.domain.Product;
+import cn.bm.ssm.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    /**
+     * 添加产品
+     */
+    @RequestMapping("/save")
+    public String save(Product product){
+        productService.save(product);
+        return "redirect:findAll.do";
+    }
+
+    /**
+     * 查询全部产品
+     * @return
+     */
     @RequestMapping("/findAll")
     public ModelAndView findAll(){
         ModelAndView modelAndView = new ModelAndView();
