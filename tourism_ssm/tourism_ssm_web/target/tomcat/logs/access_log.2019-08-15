@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [15/Aug/2019:01:27:16 +0800] "GET /tourism_ssm_web HTTP/1.1" 302 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [15/Aug/2019:01:27:18 +0800] "GET /tourism_ssm_web/ HTTP/1.1" 200 13389 http-bio-8080-exec-3 1577
+0:0:0:0:0:0:0:1 - - [15/Aug/2019:01:27:18 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [15/Aug/2019:01:27:27 +0800] "GET /tourism_ssm_web/product/findAll.do HTTP/1.1" 200 25325 http-bio-8080-exec-5 1497
