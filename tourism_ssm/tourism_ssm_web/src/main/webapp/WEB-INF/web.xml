@@ -7,7 +7,7 @@
     <!--配置加载类路径的配置文件-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:appliactionContext.xml</param-value>
+        <param-value>classpath:applicationContext.xml,classpath:spring_security.xml</param-value>
     </context-param>
 
     <!--配置监听器-->
@@ -26,7 +26,7 @@
         <!-- 配置初始化参数，创建完DispatcherServlet对象，加载springmvc.xml配置文件 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mvc.xml</param-value>
+            <param-value>classpath:spring-mvc.xml,classpath:spring_security.xml</param-value>
         </init-param>
         <!-- 服务器启动的时候，让DispatcherServlet对象创建 -->
         <load-on-startup>1</load-on-startup>
@@ -49,13 +49,22 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--用户管理配置-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <!--初始化加载页面-->
     <welcome-file-list>
-        <welcome-file>/pages/main.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/pages/main.jsp</welcome-file>
         <welcome-file>default.html</welcome-file>
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>

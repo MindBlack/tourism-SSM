@@ -11,14 +11,14 @@ import java.util.List;
 public class Orders {
     /*
   id          VARCHAR2(32) default SYS_GUID() not null,  // ---》主键
-  ordernum    VARCHAR2(20) not null,  // ---》订单编号
-  ordertime   TIMESTAMP(6), // ---》订单时间
-  peoplecount INTEGER,  //  ---》出行人数
-  orderdesc   VARCHAR2(500),  //  ---订单信息
-  paytype     INTEGER,  // ---》支付方式（0 支付宝 1 微信 2 其他）
-  orderstatus INTEGER, // ---》订单状态 （0 未支付 1 已支付）
-  productid   VARCHAR2(32), // ---》产品id外键
-  memberid    VARCHAR2(32)*/  // ---》会员联系人id外键
+  orderNum    VARCHAR2(20) not null,  // ---》订单编号
+  orderTime   TIMESTAMP(6), // ---》订单时间
+  peopleCount INTEGER,  //  ---》出行人数
+  orderDesc   VARCHAR2(500),  //  ---订单信息
+  payType     INTEGER,  // ---》支付方式（0 支付宝 1 微信 2 其他）
+  orderStatus INTEGER, // ---》订单状态 （0 未支付 1 已支付）
+  productId   VARCHAR2(32), // ---》产品id外键
+  memberId    VARCHAR2(32)*/  // ---》会员联系人id外键
     private String id;
     private String orderNum;
     private Date orderTime;
@@ -27,6 +27,14 @@ public class Orders {
     private List<Traveller> travellerList;  //旅客表
     private String orderDesc;
     private Integer payType;
+    private String payTypeStr;
+    private Integer orderStatus;
+    private String orderStatusStr;
+
+    private String productId;
+    private Product product;  // 产品表
+    private String memberId;
+    private Member member;  // 会员表
 
     public String getPayTypeStr() {
         if (payType!=null){
@@ -45,10 +53,6 @@ public class Orders {
         this.payTypeStr = payTypeStr;
     }
 
-    private String payTypeStr;
-    private Integer orderStatus;
-    private String orderStatusStr;
-
     public String getOrderStatusStr() {
         if (orderStatus!=null){
             //0 未支付 1 已支付
@@ -64,10 +68,6 @@ public class Orders {
         this.orderStatusStr = orderStatusStr;
     }
 
-    private String productId;
-    private Product product;  // 产品表
-    private String memberId;
-    private Member member;  // 会员表
 
     public String getId() {
         return id;

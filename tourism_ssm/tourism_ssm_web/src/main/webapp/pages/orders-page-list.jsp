@@ -243,7 +243,6 @@
 
 
 									<c:forEach items="${pageInfo.list}" var="orders">
-
 										<tr>
 											<td><input name="ids" type="checkbox"></td>
 											<td>${orders.id }</td>
@@ -323,6 +322,12 @@
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
+<%--								<c:forEach begin="1" end="5" var="num">--%>
+<%--									<c:if test="${num}==${pageInfo.pageSize}">--%>
+<%--										<option selected>${num}</option>--%>
+<%--									</c:if>--%>
+<%--									<option>${num}</option>--%>
+<%--								</c:forEach>--%>
                             </select> 条
                         </div>
                     </div>

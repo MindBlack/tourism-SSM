@@ -19,6 +19,20 @@ public class OrdersController {
     private OrdersService ordersService;
 
     /**
+     * 通过id查询详情
+     * @param id
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping("/findById")
+    public ModelAndView findById(String id,ModelAndView modelAndView) throws Exception {
+        Orders orders = ordersService.findById(id);
+        modelAndView.addObject("orders",orders);
+        modelAndView.setViewName("orders-show");
+        return modelAndView;
+    }
+
+    /**
      * 查询所有
      * @return
      */
@@ -36,7 +50,7 @@ public class OrdersController {
      * @return
      */
     @RequestMapping("/findAll")
-    public ModelAndView findAll(@RequestParam(name="page")int page,@RequestParam(name="pageSize")int pageSize){
+    public ModelAndView findAll(@RequestParam(name="page")int page,@RequestParam(name="pageSize")int pageSize) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         List<Orders> ordersList = ordersService.findAll(page,pageSize);
         PageInfo pageInfo = new PageInfo(ordersList);

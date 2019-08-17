@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
      * @param product
      */
     @Override
-    public void save(Product product) {
+    public void save(Product product) throws Exception {
         productDao.save(product);
     }
 
@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public List<Product> findAll() {
+    public List<Product> findAll() throws Exception {
         return productDao.findAll();
     }
 }

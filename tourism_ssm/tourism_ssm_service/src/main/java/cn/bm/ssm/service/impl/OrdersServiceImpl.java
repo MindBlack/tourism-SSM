@@ -15,11 +15,21 @@ public class OrdersServiceImpl implements OrdersService {
     private OrdersDao ordersDao;
 
     /**
+     * 通过id查询详情
+     * @param id
+     * @return
+     */
+    @Override
+    public Orders findById(String id) throws Exception {
+        return ordersDao.findById(id);
+    }
+
+    /**
      * 查询
      * @return
      */
     @Override
-    public List<Orders> findAll(int page,int pageSize) {
+    public List<Orders> findAll(int page,int pageSize) throws Exception {
         //分页插接来进行分页  pageNum-->当前页码  pageSize-->代表每页显示条数
         PageHelper.startPage(page,pageSize);
         return ordersDao.findAll();

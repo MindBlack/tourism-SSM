@@ -20,7 +20,7 @@ public class ProductController {
      * 添加产品
      */
     @RequestMapping("/save")
-    public String save(Product product){
+    public String save(Product product) throws Exception {
         productService.save(product);
         return "redirect:findAll.do";
     }
@@ -30,7 +30,7 @@ public class ProductController {
      * @return
      */
     @RequestMapping("/findAll")
-    public ModelAndView findAll(){
+    public ModelAndView findAll() throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         List<Product> productList = productService.findAll();
         modelAndView.addObject("productList",productList);
