@@ -10,6 +10,7 @@
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/pages/login.jsp" security="none"/>
     <security:http pattern="/pages/failer.jsp" security="none"/>
+    <security:http pattern="/favicon.ico" security="none"/>
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
@@ -26,10 +27,9 @@
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/pages/login.jsp"
-                login-processing-url="/login.do"
-                default-target-url="/pages/failer.jsp"
+                login-processing-url="/login"
+                default-target-url="/pages/main.jsp"
                 authentication-failure-url="/pages/failer.jsp"
-                authentication-success-forward-url="/pages/main.jsp"
         />
 
         <!-- 关闭跨域请求 -->
@@ -44,7 +44,7 @@
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userService">
             <!-- 配置加密的方式 -->
-            <!--<security:password-encoder ref="passwordEncoder"/>-->
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 

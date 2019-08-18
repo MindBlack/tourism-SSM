@@ -1,10 +1,9 @@
 package cn.bm.ssm.dao;
 
 import cn.bm.ssm.domain.UserInfo;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 public interface UserDao {
     /**
@@ -13,7 +12,7 @@ public interface UserDao {
      * @return
      * @throws Exception
      */
-    @Select("select * from Users where username = #{username}")
+    @Select("select * from users where username = #{username}")
     @Results({
             @Result(id= true,property = "id" , column = "id"),
             @Result(property = "email" , column = "email"),
@@ -21,8 +20,38 @@ public interface UserDao {
             @Result(property = "password" , column = "password"),
             @Result(property = "phoneNum" , column = "phoneNum"),
             @Result(property = "status" , column = "status"),
-            @Result(property = "roleList" ,column = "id" ,many = @Many(select = "cn.bm.ssm.dao.RoleDao.findById"))
+            @Result(property = "roleList" ,column = "id" ,many = @Many(select = "cn.bm.ssm.dao.RoleDao.findByUserId"))
     })
     UserInfo findByUsername(String username)throws Exception;
 
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Select("select * from users")
+    List<UserInfo> findAll();
+
+    /**
+     * 添加用户
+     * @param userInfo
+     */
+    @Insert("insert into users (username,password,email,phoneNum,status) values (#{username},#{password},#{email},#{phoneNum},#{status})")
+    void save(UserInfo userInfo);
+
+    /**
+     * 通过id查询用户详细数据
+     * @param id
+     * @return
+     */
+    @Select("select * from users where id = #{id}")
+    @Results({
+            @Result(id= true,property = "id" , column = "id"),
+            @Result(property = "email" , column = "email"),
+            @Result(property = "username" , column = "username"),
+            @Result(property = "password" , column = "password"),
+            @Result(property = "phoneNum" , column = "phoneNum"),
+            @Result(property = "status" , column = "status"),
+            @Result(property = "roleList" , column = "id" ,many = @Many(select = "cn.bm.ssm.dao.RoleDao.findByUserId"))
+    })
+    UserInfo findById(String id);
 }

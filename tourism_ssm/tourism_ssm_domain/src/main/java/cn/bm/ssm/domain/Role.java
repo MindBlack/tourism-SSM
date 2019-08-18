@@ -2,6 +2,9 @@ package cn.bm.ssm.domain;
 
 import java.util.List;
 
+/**
+ * 角色表
+ */
 public class Role {
     /*
   id       VARCHAR2(32) default SYS_GUID() not null,  // --->主键
