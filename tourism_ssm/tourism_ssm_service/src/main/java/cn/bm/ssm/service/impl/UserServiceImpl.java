@@ -1,5 +1,6 @@
 package cn.bm.ssm.service.impl;
 
+import cn.bm.ssm.dao.RoleDao;
 import cn.bm.ssm.dao.UserDao;
 import cn.bm.ssm.domain.Role;
 import cn.bm.ssm.domain.UserInfo;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +25,39 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private RoleDao roleDao;
+
+    /**
+     * 给用户添加角色
+     * @param userId
+     * @param ids
+     */
+    @Override
+    public void addRoleToUser(String userId, String[] ids)throws Exception {
+        for (String roleId : ids) {
+            userDao.addRoleToUser(userId,roleId);
+        }
+    }
+
+    /**
+     * 通过id查询用户所没有的权限并进行添加
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Role> findUserByIdAndRole(String userId) throws Exception {
+        return roleDao.findUserByIdAndRole(userId);
+    }
+
     /**
      * 通过id查询用户信息
      * @param id
      * @return
      */
     @Override
-    public UserInfo findById(String id) {
+    @RolesAllowed("USER")
+    public UserInfo findById(String id) throws Exception {
         return userDao.findById(id);
     }
 
@@ -38,7 +66,7 @@ public class UserServiceImpl implements UserService {
      * @param userInfo
      */
     @Override
-    public void save(UserInfo userInfo) {
+    public void save(UserInfo userInfo) throws Exception {
         userInfo.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
         userDao.save(userInfo);
     }
@@ -48,7 +76,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public List<UserInfo> findAll() {
+    public List<UserInfo> findAll() throws Exception {
         return userDao.findAll();
     }
 

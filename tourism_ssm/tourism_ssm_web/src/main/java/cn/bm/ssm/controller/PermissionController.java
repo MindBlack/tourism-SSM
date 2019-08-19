@@ -3,6 +3,7 @@ package cn.bm.ssm.controller;
 import cn.bm.ssm.domain.Permission;
 import cn.bm.ssm.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,9 @@ public class PermissionController {
      * @param model
      * @return
      */
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @RequestMapping("/findAll")
-    public String findAll(Model model){
+    public String findAll(Model model) throws Exception {
         List<Permission> permissionList = permissionService.findAll();
         model.addAttribute("permissionList",permissionList);
         return "permission-list";
@@ -37,7 +39,7 @@ public class PermissionController {
      * @return
      */
     @RequestMapping("/save")
-    public String save(Permission permission){
+    public String save(Permission permission) throws Exception {
         permissionService.save(permission);
         return "redirect:findAll.do";
     }

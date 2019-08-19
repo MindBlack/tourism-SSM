@@ -29,14 +29,14 @@ public interface UserDao {
      * @return
      */
     @Select("select * from users")
-    List<UserInfo> findAll();
+    List<UserInfo> findAll() throws Exception;
 
     /**
      * 添加用户
      * @param userInfo
      */
     @Insert("insert into users (username,password,email,phoneNum,status) values (#{username},#{password},#{email},#{phoneNum},#{status})")
-    void save(UserInfo userInfo);
+    void save(UserInfo userInfo) throws Exception;
 
     /**
      * 通过id查询用户详细数据
@@ -53,5 +53,14 @@ public interface UserDao {
             @Result(property = "status" , column = "status"),
             @Result(property = "roleList" , column = "id" ,many = @Many(select = "cn.bm.ssm.dao.RoleDao.findByUserId"))
     })
-    UserInfo findById(String id);
+    UserInfo findById(String id)throws Exception;
+
+    /**
+     * 给用户添加角色
+     * @param userId
+     * @param roleId
+     * @throws Exception
+     */
+    @Insert("insert into users_role (userId,roleId) values (#{userId},#{roleId})")
+    void addRoleToUser(@Param("userId") String userId,@Param("roleId") String roleId)throws Exception;
 }

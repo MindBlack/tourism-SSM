@@ -14,6 +14,7 @@
     <!--开启注解扫描  管理service和dao-->
     <context:component-scan base-package="cn.bm.ssm.dao"/>
     <context:component-scan base-package="cn.bm.ssm.service"/>
+    <context:component-scan base-package="cn.bm.ssm.aop"/>
 
     <!--加载dataSource-->
     <context:property-placeholder location="classpath:db.properties"/>

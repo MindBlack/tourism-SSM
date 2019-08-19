@@ -13,20 +13,28 @@ public interface PermissionDao {
      * @return
      */
     @Select("select * from permission")
-    List<Permission> findAll();
+    List<Permission> findAll() throws Exception;
 
     /**
      * 根据roleId查询对应资源权限展示
      * @param roleId
      * @return
      */
-    @Select("select * from permission where id in (select permissionId from role_permission where roleId = #{roleId})")
-    List<Permission> findByRoleId(String roleId);
+    @Select("select * from permission where id in (select permissionId from Role_Permission where roleId = #{roleId})")
+    List<Permission> findByRoleId(String roleId) throws Exception;
 
     /**
      * 添加权限
      * @param permission
      */
     @Insert("insert into permission (permissionName,url) values (#{permissionName},#{url})")
-    void save(Permission permission);
+    void save(Permission permission) throws Exception;
+
+    /**
+     * 通过id查询未添加的资源权限
+     * @param roleId
+     * @return
+     */
+    @Select("select * from permission where id not in (select permissionId from Role_Permission where roleId = #{roleId})")
+    List<Permission> findRoleByIdAndAllPermission(String roleId);
 }

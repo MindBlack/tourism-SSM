@@ -15,6 +15,11 @@
     <security:http pattern="/img/**" security="none"/>
     <security:http pattern="/plugins/**" security="none"/>
 
+    <!--spring security注解jar250开启-->
+    <!--@RolesAllowed jar250 > 不需要+前缀  @Secured  >需要+前缀  -->
+    <!--@PreAuthorize   hasAnyRole('前缀+权限'...)-> 或者principal.username=='用户名'and hasAnyRole('前缀+权限'...)-->
+    <security:global-method-security jsr250-annotations="enabled" secured-annotations="enabled" pre-post-annotations="enabled" />
+
     <!--
     	配置具体的规则
     	auto-config="true"	不用自己编写登录的页面，框架提供默认登录页面

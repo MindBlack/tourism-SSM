@@ -2,6 +2,7 @@ package cn.bm;
 
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.DigestUtils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -28,11 +29,9 @@ public class Bcpyt {
 
     @Test
     public void  md5() throws NoSuchAlgorithmException {
-        String str = "123";
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
-        str = new BigInteger(1, md5.digest(str.getBytes())).toString(32);
-        str = new String(str.getBytes());
-        System.out.println(str);
+        String encode = DigestUtils.md5DigestAsHex("123".getBytes());
+        //02cb962ac59075b964b07152d234b70
+        System.out.println(encode);
     }
 
 }
